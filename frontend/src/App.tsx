@@ -239,7 +239,10 @@ export default function App() {
 
   function choosePlace(place: Place, openDetails = false) {
     setSelectedId(place.id); setSelectedGeocode(null); setDialogResult(null); setMapCenter([place.latitude, place.longitude]);
-    if (openDetails) setDetailPlaceId(place.id);
+    if (openDetails) {
+      setDetailPlaceId(place.id);
+      if (window.matchMedia('(max-width: 720px)').matches) setViewMode('list');
+    }
   }
 
   function openCreateDialog(address = '', result: GeocodingResult | null = null) {
