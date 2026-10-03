@@ -1,6 +1,6 @@
-# Mapa Acessível — Backend
+# Mapa Acessível
 
-API REST inicial para cadastrar e consultar lugares e seus recursos de acessibilidade. Feita com TypeScript, Express e SQLite, organizada em MVC simples. O usuário de autoria é mockado; não há cadastro nem login.
+Aplicação web colaborativa para encontrar e compartilhar lugares e informações de acessibilidade. O mapa permite pesquisar locais, filtrar recursos, consultar detalhes e cadastrar novos lugares. O frontend usa React, TypeScript, Leaflet e OpenStreetMap; a API usa TypeScript, Express e SQLite em uma estrutura MVC simples. A autoria é atribuída a um usuário mockado; cadastro e login ainda não fazem parte do projeto.
 
 ## Requisitos
 
@@ -8,7 +8,9 @@ API REST inicial para cadastrar e consultar lugares e seus recursos de acessibil
 - npm
 - Frontend: React, TypeScript, Vite, Leaflet e React Leaflet
 
-## Executar
+## Executar o backend
+
+Abra um terminal na pasta raiz do projeto. Na primeira execução, instale as dependências e crie o arquivo local de configuração:
 
 ```powershell
 npm install
@@ -16,7 +18,7 @@ Copy-Item .env.example .env
 npm run dev
 ```
 
-A API inicia em `http://localhost:3000`. O arquivo SQLite é criado automaticamente em `data/accessibility.sqlite`.
+A API inicia em `http://localhost:8080`, conforme `PORT` no `.env`. O banco SQLite é criado automaticamente em `data/accessibility.sqlite`.
 
 Para gerar JavaScript compilado e executar:
 
@@ -25,21 +27,27 @@ npm run build
 npm start
 ```
 
-## Frontend
-
-O frontend React fica na pasta `frontend/` e usa a API definida em `frontend/.env.example` (padrão `http://localhost:8080`). Inicie backend e frontend em terminais separados:
+Para executar os testes básicos da API:
 
 ```powershell
-# Terminal 1: na raiz deste projeto
-npm run dev
+npm test
+```
 
-# Terminal 2: dentro de frontend/
+## Executar o frontend
+
+Mantenha o backend rodando e abra um segundo terminal na pasta `frontend/`. Na primeira execução, instale as dependências. O endereço padrão da API é `http://localhost:8080`, definido em `frontend/.env.example`.
+
+```powershell
 cd frontend
 npm install
 npm run dev
 ```
 
-Abra o endereço local informado pelo Vite, normalmente `http://localhost:5173`. A busca de endereço chama `GET /api/geocoding/search`; após escolher o resultado, o formulário envia o local e seus recursos ao `POST /api/places`.
+Abra o endereço local informado pelo Vite, normalmente `http://localhost:5173`.
+
+### Iniciar os dois serviços
+
+Use dois terminais: primeiro rode `npm run dev` na raiz para iniciar a API; depois rode `cd frontend` e `npm run dev` no segundo terminal. O frontend consome a API e usa `GET /api/geocoding/search` para sugerir endereços. Depois que a pessoa escolher um resultado, o cadastro envia o local e os recursos ao `POST /api/places`.
 
 ## Endpoints
 
@@ -65,7 +73,7 @@ npm run dev
 Defina o endereço base:
 
 ```powershell
-$base = "http://localhost:3000"
+$base = "http://localhost:8080"
 ```
 
 ### Verificar servidor
