@@ -6,6 +6,7 @@ API REST inicial para cadastrar e consultar lugares e seus recursos de acessibil
 
 - Node.js 20 ou superior
 - npm
+- Frontend: React, TypeScript, Vite, Leaflet e React Leaflet
 
 ## Executar
 
@@ -23,6 +24,22 @@ Para gerar JavaScript compilado e executar:
 npm run build
 npm start
 ```
+
+## Frontend
+
+O frontend React fica na pasta `frontend/` e usa a API definida em `frontend/.env.example` (padrão `http://localhost:8080`). Inicie backend e frontend em terminais separados:
+
+```powershell
+# Terminal 1: na raiz deste projeto
+npm run dev
+
+# Terminal 2: dentro de frontend/
+cd frontend
+npm install
+npm run dev
+```
+
+Abra o endereço local informado pelo Vite, normalmente `http://localhost:5173`. A busca de endereço chama `GET /api/geocoding/search`; após escolher o resultado, o formulário envia o local e seus recursos ao `POST /api/places`.
 
 ## Endpoints
 
